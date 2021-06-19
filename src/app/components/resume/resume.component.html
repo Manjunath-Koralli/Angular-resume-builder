@@ -14,15 +14,19 @@
     <ion-grid>
       <ion-row>
         <ion-col class="start">
-          <mat-card-title [routerLink]="'/resume-templates'">Resumes</mat-card-title>
+          <mat-card-title [routerLink]="'/resume-templates'"
+            >Resumes</mat-card-title
+          >
           <mat-card-subtitle>Student/Intermediate</mat-card-subtitle>
         </ion-col>
         <ion-col class="start">
-          <mat-card-title [routerLink]="'/cv-templates'" >CVs</mat-card-title>
+          <mat-card-title [routerLink]="'/cv-templates'">CVs</mat-card-title>
           <mat-card-subtitle>Senior</mat-card-subtitle>
         </ion-col>
         <ion-col class="start">
-          <mat-card-title [routerLink]="'/cover-letters'">Cover Letters</mat-card-title>
+          <mat-card-title [routerLink]="'/cover-letters'"
+            >Cover Letters</mat-card-title
+          >
           <mat-card-subtitle>All levels of experience</mat-card-subtitle>
         </ion-col>
       </ion-row>
@@ -34,8 +38,9 @@
         <ion-col>
           <h2>Pick from Free Resume Templates</h2>
           <p>
-            Pick one of our free resume templates, fill it out, and land that dream job! Create and download your
-            professional resume in less that 5 minutes.
+            Pick one of our free resume templates, fill it out, and land that
+            dream job! Create and download your professional resume in less that
+            5 minutes.
           </p>
         </ion-col>
         <ion-col></ion-col>
@@ -44,27 +49,51 @@
   </mat-card-content>
 </mat-card>
 
-
-<ion-grid >
+<ion-grid>
   <ion-row>
-    <ion-col>
-      <mat-card class="info-card" (click)="gotoResumeForm()">Simple card</mat-card>
+    <ion-col size="5">
+      <mat-card class="resume-card" (click)="gotoResumeForm()">
+        <mat-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2"> Jane Doe </ion-col>
+              <ion-col size="10"></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col> Developer </ion-col>
+            </ion-row>
+          </ion-grid>
+        </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
     </ion-col>
-    <ion-col></ion-col>
-    <ion-col>
-      <mat-card class="info-card" (click)="gotoResumeForm()">Simple card</mat-card>
+    <ion-col size="2"></ion-col>
+    <ion-col size="5">
+      <mat-card class="resume-card" (click)="gotoResumeForm()">
+        Simple card
+        <mat-card-header> </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
     </ion-col>
   </ion-row>
 </ion-grid>
 
 <ion-grid>
   <ion-row>
-    <ion-col>
-      <mat-card class="info-card" (click)="gotoResumeForm()">Simple card</mat-card>
+    <ion-col size="5">
+      <mat-card class="resume-card" (click)="gotoResumeForm()">
+        Simple card
+        <mat-card-header> </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
     </ion-col>
-    <ion-col></ion-col>
-    <ion-col>
-      <mat-card class="info-card" (click)="gotoResumeForm()">Simple card</mat-card>
+    <ion-col size="2"></ion-col>
+    <ion-col size="5">
+      <mat-card class="resume-card" (click)="gotoResumeForm()">
+        Simple card
+        <mat-card-header> </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
     </ion-col>
   </ion-row>
 </ion-grid>

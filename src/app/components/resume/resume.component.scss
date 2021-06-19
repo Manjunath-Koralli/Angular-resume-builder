@@ -1,5 +1,6 @@
 .info-card {
   margin: 100px;
+  margin-bottom: 10px;
   border-radius: 10px;
   background-color: #d9d9d9;
   color: black;
@@ -9,6 +10,20 @@
     transition: all 0.2s ease;
   }
 }
+
+.resume-card {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  color: black;
+  &:hover {
+    transition: all 0.2s ease;
+  }
+}
+
 .title {
   padding-top: 20px;
 }
