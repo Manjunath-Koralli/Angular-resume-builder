@@ -13,7 +13,7 @@ export class ResumeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  gotoResumeForm(){
-    this.router.navigateByUrl('/cv-templates');
+  gotoResumeForm(type : string){
+    this.router.navigateByUrl(`resume/${type}-resume`);
   }
 }

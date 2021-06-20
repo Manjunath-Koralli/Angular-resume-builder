@@ -1,0 +1,33 @@
+.resume-card {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  &:hover {
+    //transition: all 0.9s ease;
+    box-shadow: 0 8px 8px 8px rgba(0, 0, 0, 0.2),
+      0 8px 8px 0 rgba(0, 0, 0, 0.14), 0 8px 8px 0 rgba(0, 0, 0, 0.12) !important;
+    transform: translate3d(0, 0, 0);
+    transition: background 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.social-card {
+  border-radius: none !important;
+  background-color: white;
+  color: black;
+}
+
+.example-full-width {
+  color: black;
+  width: 100%;
+}
+
+.form-label {
+  color: black;
+}
+
