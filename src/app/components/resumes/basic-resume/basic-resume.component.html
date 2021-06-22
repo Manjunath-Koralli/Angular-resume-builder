@@ -1,112 +1,155 @@
-<ion-grid>
+<ion-grid class="template-background">
   <ion-row>
     <ion-col size="2"> </ion-col>
     <ion-col size="8">
       <mat-card class="resume-card">
         <mat-card-content>
-          <form class="example-form">
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">Name</mat-label>
-              <input matInput placeholder="your name" value="Jane Doe" />
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">About you</mat-label>
-              <textarea matInput placeholder=""></textarea>
-            </mat-form-field>
-
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <mat-form-field class="example-full-width">
-                    <mat-label class="form-label">Email</mat-label>
-                    <input
-                      type="email"
-                      matInput
-                      placeholder="your name"
-                      value="Jane Doe"
-                    />
-                  </mat-form-field>
-                </ion-col>
-                <ion-col>
-                  <mat-form-field class="example-full-width">
-                    <mat-label class="form-label">Contact</mat-label>
-                    <input
-                      type="tel"
-                      matInput
-                      placeholder="your name"
-                      value="Jane Doe"
-                    />
-                  </mat-form-field>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <mat-form-field class="example-full-width">
-                    <mat-label class="form-label">LinkedIn</mat-label>
-                    <input
-                      type="text"
-                      matInput
-                      placeholder="your name"
-                      value="Jane Doe"
-                    />
-                  </mat-form-field>
-                </ion-col>
-                <ion-col>
-                  <mat-form-field class="example-full-width">
-                    <mat-label class="form-label">Github</mat-label>
-                    <input
-                      type="text"
-                      matInput
-                      placeholder="your name"
-                      value="Jane Doe"
-                    />
-                  </mat-form-field>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">SKILLS</mat-label>
-              <mat-chip-list #chipList aria-label="Skil selection">
-                <mat-chip
-                  *ngFor="let skill of skills"
-                  [selectable]="selectable"
-                  [removable]="removable"
-                  (removed)="remove(skill)"
-                >
-                  {{ skill.name }}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
+          <form [formGroup]="resumeForm" class="example-form" (ngSubmit)="onSave()">
+            <div formGroupName="resumeDetails">
+              <mat-form-field class="example-full-width">
+                <mat-label class="form-label">Name</mat-label>
                 <input
-                  placeholder="New skill..."
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="add($event)"
+                  formControlName="name"
+                  matInput
+                  placeholder="your name"
+                  value="Jane Doe"
                 />
-              </mat-chip-list>
-            </mat-form-field>
+              </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">Work Experience</mat-label>
-              <input matInput placeholder="your name" value="Jane Doe" />
-            </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label  class="form-label"
+                  >About you</mat-label
+                >
+                <textarea formControlName="about" matInput placeholder=""></textarea>
+              </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">Education</mat-label>
-              <input matInput placeholder="your name" value="Jane Doe" />
-            </mat-form-field>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <mat-form-field class="example-full-width">
+                      <mat-label class="form-label">Email</mat-label>
+                      <input
+                        type="email"
+                        matInput
+                        placeholder="your name"
+                        value="Jane Doe"
+                        formControlName="email"
+                      />
+                    </mat-form-field>
+                  </ion-col>
+                  <ion-col>
+                    <mat-form-field class="example-full-width">
+                      <mat-label class="form-label">Contact</mat-label>
+                      <input
+                        type="tel"
+                        matInput
+                        placeholder="your name"
+                        value="Jane Doe"
+                        formControlName="contact"
+                      />
+                    </mat-form-field>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <mat-form-field class="example-full-width">
+                      <mat-label class="form-label">LinkedIn</mat-label>
+                      <input
+                        type="text"
+                        matInput
+                        placeholder="your name"
+                        value="Jane Doe"
+                        formControlName="linkedin"
+                      />
+                    </mat-form-field>
+                  </ion-col>
+                  <ion-col>
+                    <mat-form-field class="example-full-width">
+                      <mat-label class="form-label">Github</mat-label>
+                      <input
+                        type="text"
+                        matInput
+                        placeholder="your name"
+                        value="Jane Doe"
+                        formControlName="github"
+                      />
+                    </mat-form-field>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
 
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">Organizations</mat-label>
-              <input matInput placeholder="your name" value="Jane Doe" />
-            </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label class="form-label">SKILLS</mat-label>
+                <mat-chip-list #chipList aria-label="Skil selection">
+                  <mat-chip
+                    *ngFor="let skill of skills"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(skill)"
+                  >
+                    {{ skill.name }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New skill..."
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                </mat-chip-list>
+              </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-              <mat-label class="form-label">Languages</mat-label>
-              <input matInput placeholder="your name" value="Jane Doe" />
-            </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label class="form-label">Work Experience</mat-label>
+                <input
+                  formControlName="exp"
+                  matInput
+                  placeholder="your name"
+                  value="Jane Doe"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label class="form-label">Education</mat-label>
+                <input
+                  formControlName="edu"
+                  matInput
+                  placeholder="your name"
+                  value="Jane Doe"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label class="form-label">Organizations</mat-label>
+                <input
+                  formControlName="org"
+                  matInput
+                  placeholder="your name"
+                  value="Jane Doe"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label class="form-label">Languages</mat-label>
+                <input
+                  formControlName="language"
+                  matInput
+                  placeholder="your name"
+                  value="Jane Doe"
+                />
+              </mat-form-field>
+
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="5"></ion-col>
+                  <ion-col size="2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </ion-col>
+                  <ion-col size="5"></ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
           </form>
         </mat-card-content>
       </mat-card>

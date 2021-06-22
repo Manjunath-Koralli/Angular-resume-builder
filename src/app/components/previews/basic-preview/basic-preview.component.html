@@ -1,0 +1,186 @@
+<div class="preview-background">
+  <ion-grid>
+  <ion-row>
+    <ion-col size="3"></ion-col>
+    <ion-col size="6">
+      <mat-card class="preview-card">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+                <mat-card class="font-card" [ngbPopover]="popContent">
+                    <fa-icon [icon]="faFont" class="fa-2x"></fa-icon>
+                    Choose Fonts                    
+                </mat-card>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col size="3">
+                <mat-card class="download-card">
+                  <fa-icon [icon]="faArrowDown" class="fa-2x"></fa-icon>
+                  Download Resume
+                </mat-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </mat-card>
+    </ion-col>
+    <ion-col size="3"></ion-col>
+  </ion-row>
+</ion-grid>
+
+<ng-template #popContent>
+  <b><p>Style</p></b>
+  <div class="popcard" *ngFor="let font of fonts">
+    <p (click)="setFont($event)">{{ font }}</p>
+  </div>
+</ng-template>
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="2"></ion-col>
+    <ion-col size="8">
+      <mat-card class="resume-preview-card">
+        <mat-card-content>
+          <mat-card-title>{{ exampleObject.name }}</mat-card-title>
+          <p class="ptag">{{ exampleObject.about }}</p>
+          <hr style="color: black;">
+          <ion-grid>
+            <ion-row>
+              <ion-col>{{ exampleObject.email }}</ion-col>
+              <ion-col>{{ exampleObject.contact }}</ion-col>
+              <ion-col *ngIf="exampleObject.linkedin">{{ exampleObject.linkedin }}</ion-col>
+              <ion-col>{{ exampleObject.github }}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <hr style="color: black;">
+          <h2>SKILLS</h2>
+          <mat-chip-list #chipList aria-label="Skil selection">
+            <mat-chip *ngFor="let skill of skills" [selectable]="selectable" [removable]="removable"
+              (removed)="remove(skill)">
+              {{ skill.name }}
+            </mat-chip>
+          </mat-chip-list>
+          <br>
+          <h2>WORK EXPERIENCE</h2>
+          <div *ngFor="let exp of exampleObject.experience">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="des">{{ exp.designation }}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>{{ exp.cname }}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>{{ exp.years }}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ul *ngFor="let desc of exp.description"> 
+                    <li>{{ desc }}</li>
+                  </ul> 
+                </ion-col>
+              </ion-row>
+            </ion-grid>            
+          </div>
+          <h2>EDUCATION</h2>
+          <div *ngFor="let edu of exampleObject.education">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="des">{{ edu.course }}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>{{ edu.clg_name }}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>{{ edu.years }}</ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <h2>LANGUAGES</h2>
+          <ion-grid>
+            <ion-row >
+              <ion-col *ngFor="let lan of exampleObject.language">
+                {{ lan }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <!-- <ion-grid>
+            <ion-row>
+              <ion-col size="5" style="color: black;"><hr></ion-col>
+              <ion-col></ion-col>
+              <ion-col size="5" style="color: black;"><hr></ion-col>
+            </ion-row>            
+          </ion-grid> -->
+          
+        </mat-card-content>
+      </mat-card>
+    </ion-col>
+    <ion-col size="2"></ion-col>
+  </ion-row>
+</ion-grid>
+
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div class="card preview-card">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col-3">
+            <div
+              class="card download-card"
+              (click)="createPdfTem(pdfContainer)"
+            >
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col">
+                    <fa-icon [icon]="faArrowDown" class="fa-2x"></fa-icon>
+                  </div>
+                  <div class="col">Download</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div> -->
+
+<!-- <div class="container" #pdfContainer>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">{{ exampleObject.name }}</h1>
+        <p>{{ exampleObject.about }}</p>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <fa-icon [icon]="faArrowDown" class="fa-2x"></fa-icon
+            >{{ exampleObject.email }}
+          </div>
+          <div class="col">{{ exampleObject.contact }}</div>
+          <div class="col">{{ exampleObject.linkedin }}</div>
+          <div class="col">{{ exampleObject.github }}</div>
+        </div>
+        <hr />
+        <h1>Skills</h1>
+        <div class="row">
+          <div class="col" *ngFor="let skill of skills">
+            {{ skill.name }}
+          </div>
+        </div>
+        <h1>Work Experience</h1>
+        <ul *ngFor="let ex of exampleObject.exp">
+          <h1>{{ ex.cname }}</h1>
+          <li>{{ ex.des }}</li>
+          <li>{{ ex.years }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,94 @@
+.preview-background {
+  background-color: #404040;
+  //height: auto;
+}
+.preview-card {
+  margin-top: 10px;
+  border-radius: 50px;
+  background-color: #595959;
+  //height: 80px;
+}
+
+.download-card {
+  // height: 30px;
+  margin-top: 0px;
+  text-align: center;
+  border-radius: 50px;
+  background-color: #b3b3b3;
+  //background-color: #595959;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 8px 8px rgba(0, 0, 0, 0.2),
+      0 8px 8px 0 rgba(0, 0, 0, 0.14), 0 8px 8px 0 rgba(0, 0, 0, 0.12) !important;
+    transform: translate3d(0, 0, 0);
+    transition: background 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.font-card {
+  // height: 30px;
+  margin-top: 0px;
+  text-align: center;
+  border-radius: 50px;
+  background-color: #b3b3b3;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 8px 8px rgba(0, 0, 0, 0.2),
+      0 8px 8px 0 rgba(0, 0, 0, 0.14), 0 8px 8px 0 rgba(0, 0, 0, 0.12) !important;
+    transform: translate3d(0, 0, 0);
+    transition: background 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.resume-preview-card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #e6e6e6;
+  //height: 80px;
+  color: black;
+  font-size: small;
+}
+
+.des {
+  font-weight: bold;
+}
+
+.popcard {
+  width: 150px;
+  color: #595959;
+  font-size: medium;  
+}
+
+.ptag1Ubuntu {
+  font-size: large;
+  font-family: "Ubuntu";
+}
+.ptag1Raleway {
+  font-size: large;
+  font-family: 'Raleway';
+}
+
+.ptag1Roboto {
+  font-size: large;
+  font-family: "Roboto";
+}
+
+.ptag1Overpass {
+  font-size: large;
+  font-family: "Oxygen";
+}
+
+.ptag1Hind {
+  font-size: large;
+  font-family: "Hind";
+}
+
+.popcard > p {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
