@@ -5,27 +5,22 @@
       <mat-card class="resume-card">
         <mat-card-content>
           <form [formGroup]="resumeForm" class="example-form" (ngSubmit)="onSave()">
-            <div formGroupName="resumeDetails">
-              <mat-form-field class="example-full-width">
-                <mat-label class="form-label">Name</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="your name"
-                  value="Jane Doe"
-                />
-              </mat-form-field>
-
-              <mat-form-field class="example-full-width">
-                <mat-label  class="form-label"
-                  >About you</mat-label
-                >
-                <textarea formControlName="about" matInput placeholder=""></textarea>
-              </mat-form-field>
-
+            <div formGroupName="personal">
               <ion-grid>
                 <ion-row>
-                  <ion-col>
+                  <ion-col size="5">
+                    <mat-form-field class="example-full-width">
+                      <mat-label class="form-label">Name</mat-label>
+                      <input class="inputs" matInput formControlName="name" placeholder="Name" />
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                      <mat-label class="form-label">Languages</mat-label>
+                      <input formControlName="language" matInput placeholder="Language"/>
+                    </mat-form-field>
+                  </ion-col>
+                  <ion-col size="2"></ion-col>
+                  <ion-col size="5">
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Email</mat-label>
                       <input
@@ -36,8 +31,7 @@
                         formControlName="email"
                       />
                     </mat-form-field>
-                  </ion-col>
-                  <ion-col>
+
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Contact</mat-label>
                       <input
@@ -48,10 +42,7 @@
                         formControlName="contact"
                       />
                     </mat-form-field>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>
+
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">LinkedIn</mat-label>
                       <input
@@ -62,8 +53,7 @@
                         formControlName="linkedin"
                       />
                     </mat-form-field>
-                  </ion-col>
-                  <ion-col>
+
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Github</mat-label>
                       <input
@@ -76,8 +66,17 @@
                     </mat-form-field>
                   </ion-col>
                 </ion-row>
-              </ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <mat-form-field class="example-full-width">
+                      <mat-label  class="form-label">About you</mat-label>
+                      <textarea formControlName="about" matInput placeholder="" class="text-area"></textarea>
+                    </mat-form-field>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>          
 
+              <br>
               <mat-form-field class="example-full-width">
                 <mat-label class="form-label">SKILLS</mat-label>
                 <mat-chip-list #chipList aria-label="Skil selection">
@@ -99,46 +98,89 @@
                   />
                 </mat-chip-list>
               </mat-form-field>
+            </div>
 
+            <!-- <div formGroupName="workExperience" *ngIf="!addWorkBoolean"> -->
+            <div>
+              <div class="input-space-work" #inputwork>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="10">
+                      <mat-label class="form-label">Work Experience</mat-label>
+                    </ion-col>                    
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="8" class="work-grid" >
+                      <div class="inputs-exp" *ngFor = "let count of addWorkCount; let i = index;">
+                        <div formGroupName="workExperience{{count}}">
+                          <input [formControlName]="designation + 1" placeholder="Designation" type="text" />
+                          <input [formControlName]="cname + 1" placeholder="Company Name" type="text" />
+                          <hr class="line-style">
+                        </div>
+                      </div>                            
+                    </ion-col>
+                    <ion-col size="3"></ion-col>
+                    <ion-col size="1">
+                      <mat-card class="add-delete">
+                        <fa-icon [icon]="faPlusCircle" class="fa-2x" (click)="addWork()"></fa-icon>
+                        <br><br>
+                        <fa-icon [icon]="faTrashAlt" class="fa-2x" (click)="removeWork()"></fa-icon>
+                      </mat-card>                      
+                    </ion-col>
+                  </ion-row>                  
+                </ion-grid>                  
+              </div> 
+            </div>    
+            <br>
+
+            <div>
+              <div class="input-space-edu" #inputedu>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="10"><mat-label class="form-label">Education</mat-label></ion-col>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="8" class="edu-grid">
+                      <div class="inputs-edu" *ngFor = "let count of addEduCount; let i = index;">
+                        <div formGroupName="education{{count}}">
+                          <input formControlName="course1" placeholder="Course name" type="text"/>
+                          <input formControlName="clg_name1" placeholder="School/College"  type="text" />
+                          <hr class="line-style"> 
+                        </div>
+                      </div>                       
+                    </ion-col>
+                    <ion-col size="3"></ion-col>
+                    <ion-col size="1">
+                      <mat-card class="add-delete">
+                        <fa-icon [icon]="faPlusCircle" class="fa-2x" (click)="addEdu()"></fa-icon>
+                        <br><br>
+                        <fa-icon [icon]="faTrashAlt" class="fa-2x" (click)="removeEdu()"></fa-icon>
+                      </mat-card>                      
+                    </ion-col>
+                  </ion-row>                  
+                </ion-grid>
+                
+              </div>
+            </div>
+
+            <div formGroupName="technical">
               <mat-form-field class="example-full-width">
-                <mat-label class="form-label">Work Experience</mat-label>
+                <mat-label class="form-label">Technical Skills</mat-label>
                 <input
-                  formControlName="exp"
+                  formControlName="technicalskills"
                   matInput
                   placeholder="your name"
                   value="Jane Doe"
                 />
               </mat-form-field>
-
-              <mat-form-field class="example-full-width">
-                <mat-label class="form-label">Education</mat-label>
-                <input
-                  formControlName="edu"
-                  matInput
-                  placeholder="your name"
-                  value="Jane Doe"
-                />
-              </mat-form-field>
-
-              <mat-form-field class="example-full-width">
-                <mat-label class="form-label">Organizations</mat-label>
-                <input
-                  formControlName="org"
-                  matInput
-                  placeholder="your name"
-                  value="Jane Doe"
-                />
-              </mat-form-field>
-
-              <mat-form-field class="example-full-width">
-                <mat-label class="form-label">Languages</mat-label>
-                <input
-                  formControlName="language"
-                  matInput
-                  placeholder="your name"
-                  value="Jane Doe"
-                />
-              </mat-form-field>
+            </div>
+              
 
               <ion-grid>
                 <ion-row>
@@ -149,7 +191,7 @@
                   <ion-col size="5"></ion-col>
                 </ion-row>
               </ion-grid>
-            </div>
+            
           </form>
         </mat-card-content>
       </mat-card>
