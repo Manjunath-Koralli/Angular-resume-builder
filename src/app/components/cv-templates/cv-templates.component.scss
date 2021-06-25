@@ -1,0 +1,38 @@
+.info-card {
+  margin: 100px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  color: black;
+}
+.info-card {
+  &:hover {
+    transition: all 0.9s ease;
+  }
+}
+
+.info-content {
+  margin: 25px;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  cursor: pointer;
+  color: black;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  &:hover {
+    transition: all 0.9s ease;
+    color: #b3b3b3;
+  }
+}
+
+.card-active-link {
+  color:gray;
+  //font-weight: bold;
+  &:hover {
+    transition: all 0.5s ease;
+  }
+}

@@ -27,6 +27,11 @@
   }
 }
 
+.image-card {
+  padding-top: 50px;
+  padding-left: 30px;
+}
+
 .title {
   padding-top: 20px;
 }
@@ -56,7 +61,27 @@ mat-card-subtitle {
 mat-card-title,
 mat-card-subtitle {
   &:hover {
-    transition: all 0.9s ease;
+    transition: all 0.5s ease;
     color: #b3b3b3;
   }
+}
+
+.card-active-link {
+  color:gray;
+  //font-weight: bold;
+  &:hover {
+    transition: all 0.5s ease;
+  }
+}
+
+.resume-name {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  font-family: "Raleway";
+}
+
+.resume-about {
+  color: black;
+  font-family: "Oxygen";
 }

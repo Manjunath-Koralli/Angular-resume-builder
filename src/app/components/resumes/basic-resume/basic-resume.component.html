@@ -11,58 +11,44 @@
                   <ion-col size="5">
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Name</mat-label>
-                      <input class="inputs" matInput formControlName="name" placeholder="Name" />
+                      <input class="inputs" matInput formControlName="name" placeholder="Name" />                        
                     </mat-form-field>
+                    <div class="error" *ngIf="name.invalid && (name.dirty || name.touched)">
+                          <div *ngIf="name.errors.required || name.errors.notOnlyWhitespace">
+                              Name is required
+                          </div>
+                    </div>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Languages</mat-label>
                       <input formControlName="language" matInput placeholder="Language"/>
                     </mat-form-field>
+                    <div class="error" *ngIf="language.invalid && (language.dirty || language.touched)">
+                      <div *ngIf="language.errors.required || language.errors.notOnlyWhitespace">
+                        Language is required
+                      </div>
+                    </div>
                   </ion-col>
                   <ion-col size="2"></ion-col>
                   <ion-col size="5">
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Email</mat-label>
-                      <input
-                        type="email"
-                        matInput
-                        placeholder="your name"
-                        value="Jane Doe"
-                        formControlName="email"
-                      />
+                      <input type="email" matInput placeholder="email" formControlName="email"/>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Contact</mat-label>
-                      <input
-                        type="tel"
-                        matInput
-                        placeholder="your name"
-                        value="Jane Doe"
-                        formControlName="contact"
-                      />
+                      <input type="tel" matInput placeholder="contact" formControlName="contact" />
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">LinkedIn</mat-label>
-                      <input
-                        type="text"
-                        matInput
-                        placeholder="your name"
-                        value="Jane Doe"
-                        formControlName="linkedin"
-                      />
+                      <input type="text" matInput placeholder="linkedin" formControlName="linkedin"/>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Github</mat-label>
-                      <input
-                        type="text"
-                        matInput
-                        placeholder="your name"
-                        value="Jane Doe"
-                        formControlName="github"
-                      />
+                      <input type="text" matInput placeholder="github" formControlName="github"/>
                     </mat-form-field>
                   </ion-col>
                 </ion-row>
@@ -79,7 +65,7 @@
               <br>
               <mat-form-field class="example-full-width">
                 <mat-label class="form-label">SKILLS</mat-label>
-                <mat-chip-list #chipList aria-label="Skil selection">
+                <mat-chip-list #chipList aria-label="Skill selection">
                   <mat-chip
                     *ngFor="let skill of skills"
                     [selectable]="selectable"
@@ -91,6 +77,7 @@
                   </mat-chip>
                   <input
                     placeholder="New skill..."
+                    formControlName = "skill"
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
@@ -98,9 +85,13 @@
                   />
                 </mat-chip-list>
               </mat-form-field>
+              <div class="error" *ngIf="!skills.length">
+                Skill is required
+              </div>
             </div>
-
+            <br>
             <!-- <div formGroupName="workExperience" *ngIf="!addWorkBoolean"> -->
+            <!-- WORK EXPERIENCE -->
             <div>
               <div class="input-space-work" #inputwork>
                 <ion-grid>
@@ -115,9 +106,55 @@
                   <ion-row>
                     <ion-col size="8" class="work-grid" >
                       <div class="inputs-exp" *ngFor = "let count of addWorkCount; let i = index;">
-                        <div formGroupName="workExperience{{count}}">
-                          <input [formControlName]="designation + 1" placeholder="Designation" type="text" />
-                          <input [formControlName]="cname + 1" placeholder="Company Name" type="text" />
+                        <div formGroupName="{{count}}">
+                          <input formControlName="designation1" placeholder="Designation" type="text" />
+                          <input formControlName="cname1" placeholder="Company Name" type="text" />
+                          <ion-grid>
+                            <ion-row>
+                              <ion-col size="3">
+                                <input formControlName="fromDate1" placeholder="mm/yyyy" type="text" />
+                              </ion-col>
+                              <ion-col></ion-col>
+                              <ion-col size="3">
+                                <input formControlName="toDate1" placeholder="mm/yyyy" type="text" />
+                              </ion-col>
+                              <ion-col size="5"></ion-col>
+                            </ion-row>
+                          </ion-grid>
+                          <ion-grid>
+                            <ion-row>
+                              <ion-col size="4">
+                                <div class="error" *ngIf="resumeForm.get(count + '.fromDate1').invalid 
+                                    && (resumeForm.get(count + '.fromDate1').dirty 
+                                    || resumeForm.get(count + '.fromDate1').touched)">
+                                  <div *ngIf="resumeForm.get(count + '.fromDate1').errors.required">
+                                    From date month is required
+                                  </div> 
+                                  <div *ngIf="resumeForm.get(count + '.fromDate1').errors.dateValidation">
+                                    From date month pattern is not correct
+                                  </div>
+                                  <div *ngIf="resumeForm.get(count + '.fromDate1').errors.monthValidation">
+                                    From date month is not correct
+                                  </div>
+                                </div>
+                              </ion-col>
+                              <ion-col></ion-col>
+                              <ion-col size="4">
+                                <div class="error" *ngIf="resumeForm.get(count + '.toDate1').invalid 
+                                && (resumeForm.get(count + '.toDate1').dirty 
+                                || resumeForm.get(count + '.toDate1').touched)">
+                                  <div *ngIf="resumeForm.get(count + '.toDate1').errors.required">
+                                    To date is required
+                                  </div> 
+                                  <div *ngIf="resumeForm.get(count + '.toDate1').errors.dateValidation">
+                                    To date pattern is not correct
+                                  </div>
+                                </div>
+                              </ion-col>
+                              <ion-col size="4"></ion-col>
+                            </ion-row>
+                          </ion-grid>
+                          <textarea formControlName="tasks1" placeholder="Achievement/Tasks" type="text"></textarea>
                           <hr class="line-style">
                         </div>
                       </div>                            
@@ -127,15 +164,17 @@
                       <mat-card class="add-delete">
                         <fa-icon [icon]="faPlusCircle" class="fa-2x" (click)="addWork()"></fa-icon>
                         <br><br>
-                        <fa-icon [icon]="faTrashAlt" class="fa-2x" (click)="removeWork()"></fa-icon>
+                        <fa-icon [icon]="faTrashAlt" class="fa-2x workDel" (click)="removeWork()"></fa-icon>
                       </mat-card>                      
                     </ion-col>
                   </ion-row>                  
                 </ion-grid>                  
               </div> 
             </div>    
-            <br>
+            
+            <hr class="line-style">
 
+            <!-- EDUCATION -->
             <div>
               <div class="input-space-edu" #inputedu>
                 <ion-grid>
@@ -148,9 +187,51 @@
                   <ion-row>
                     <ion-col size="8" class="edu-grid">
                       <div class="inputs-edu" *ngFor = "let count of addEduCount; let i = index;">
-                        <div formGroupName="education{{count}}">
+                        <div formGroupName="{{count}}">
                           <input formControlName="course1" placeholder="Course name" type="text"/>
                           <input formControlName="clg_name1" placeholder="School/College"  type="text" />
+                          <ion-grid>
+                            <ion-row>
+                              <ion-col size="3">
+                                <input formControlName="fromDate1" placeholder="mm/yyyy" type="text" />
+                              </ion-col>
+                              <ion-col></ion-col>
+                              <ion-col size="3">
+                                <input formControlName="toDate1" placeholder="mm/yyyy" type="text" />
+                              </ion-col>
+                              <ion-col size="5"></ion-col>
+                            </ion-row>
+                          </ion-grid>
+                          <ion-grid>
+                            <ion-row>
+                              <ion-col size="4">
+                                <div class="error" *ngIf="resumeForm.get(count + '.fromDate1').invalid 
+                                    && (resumeForm.get(count + '.fromDate1').dirty 
+                                    || resumeForm.get(count + '.fromDate1').touched)">
+                                  <div *ngIf="resumeForm.get(count + '.fromDate1').errors.required">
+                                    From date is required
+                                  </div> 
+                                  <div *ngIf="resumeForm.get(count + '.fromDate1').errors.dateValidation">
+                                    From date pattern is not correct
+                                  </div>
+                                </div>
+                              </ion-col>
+                              <ion-col></ion-col>
+                              <ion-col size="4">
+                                <div class="error" *ngIf="resumeForm.get(count + '.toDate1').invalid 
+                                && (resumeForm.get(count + '.toDate1').dirty 
+                                || resumeForm.get(count + '.toDate1').touched)">
+                                  <div *ngIf="resumeForm.get(count + '.toDate1').errors.required">
+                                    To date is required
+                                  </div> 
+                                  <div *ngIf="resumeForm.get(count + '.toDate1').errors.dateValidation">
+                                    To date pattern is not correct
+                                  </div>
+                                </div>
+                              </ion-col>
+                              <ion-col size="4"></ion-col>
+                            </ion-row>
+                          </ion-grid>
                           <hr class="line-style"> 
                         </div>
                       </div>                       
@@ -160,7 +241,7 @@
                       <mat-card class="add-delete">
                         <fa-icon [icon]="faPlusCircle" class="fa-2x" (click)="addEdu()"></fa-icon>
                         <br><br>
-                        <fa-icon [icon]="faTrashAlt" class="fa-2x" (click)="removeEdu()"></fa-icon>
+                        <fa-icon [icon]="faTrashAlt" class="fa-2x workEdu" (click)="removeEdu()"></fa-icon>
                       </mat-card>                      
                     </ion-col>
                   </ion-row>                  
@@ -168,8 +249,8 @@
                 
               </div>
             </div>
-
-            <div formGroupName="technical">
+            <hr class="line-style">
+            <div formGroupName="technical" class="input-space-edu">
               <mat-form-field class="example-full-width">
                 <mat-label class="form-label">Technical Skills</mat-label>
                 <input
@@ -180,17 +261,16 @@
                 />
               </mat-form-field>
             </div>
-              
-
-              <ion-grid>
-                <ion-row>
-                  <ion-col size="5"></ion-col>
-                  <ion-col size="2">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                  </ion-col>
-                  <ion-col size="5"></ion-col>
-                </ion-row>
-              </ion-grid>
+            <br>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col size="2">
+                  <button type="submit" class="btn btn-primary">Save details</button>
+                </ion-col>
+                <ion-col size="5"></ion-col>
+              </ion-row>
+            </ion-grid>
             
           </form>
         </mat-card-content>
