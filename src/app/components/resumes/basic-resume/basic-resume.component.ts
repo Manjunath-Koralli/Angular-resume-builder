@@ -43,18 +43,21 @@ export class BasicResumeComponent implements OnInit {
 
   addWorkCount = ['workExperience1'];
   addWorkBoolean: Boolean = false;
-  designation = 'designation';
-  cname = 'cname';
+  workExp; 
 
   addEduCount = ['education1'];
-  course = 'course';
-  clg_name = 'clg_name';
+  education;
+
+  lstorage : Storage = localStorage;
+  resumeDetails: any;
+  edit : boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private resumeService: ResumeinfoService,
     private router: Router
   ) {}
 
+  skills: Skill[] = [{ name: 'Team Work' }];
   ngOnInit(): void {
     if (this.addWorkCount.length == 1) {
       this.disableButton('workDel');
@@ -63,96 +66,211 @@ export class BasicResumeComponent implements OnInit {
     if (this.addEduCount.length == 1) {
       this.disableButton('workEdu');
     }
+    this.resumeDetails = JSON.parse(this.lstorage.getItem('resumeDetails'));
+    this.edit = this.resumeService.getEdit();
+    if(this.edit) {
+      this.skills = [];
+      // console.log(this.resumeDetails.skills)
+      for(let skill of this.resumeDetails.skills) {
+        this.skills.push(skill);
+      }
+      this.resumeForm = this.formBuilder.group({
+        personal: this.formBuilder.group({
+          name: new FormControl(this.resumeDetails.name, [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          language: new FormControl(this.resumeDetails.language, [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          about: new FormControl(this.resumeDetails.about, [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          email: new FormControl(this.resumeDetails.email, [
+            Validators.required,
+            // Validators.minLength(2),
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          ]),
+          contact: new FormControl(this.resumeDetails.contact, [
+            Validators.required,
+            Validators.pattern('[0-9]{10}'),
+          ]),
+          linkedin: new FormControl(this.resumeDetails.linkedin, [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          github: new FormControl(this.resumeDetails.github, [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          skill: new FormControl(''),
+        }),
+  
+        technical: this.formBuilder.group({
+          technicalskills: new FormControl(this.resumeDetails.techSkills.technicalskills, [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+        })
+      });
 
-    this.resumeForm = this.formBuilder.group({
-      personal: this.formBuilder.group({
-        name: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        language: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        about: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        email: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-        ]),
-        contact: new FormControl('', [
-          Validators.required,
-          Validators.pattern('[0-9]{10}'),
-        ]),
-        linkedin: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        github: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        skill: new FormControl('', [Validators.required]),
-      }),
+      this.addWorkCount = [];
+      this.workExp = Object.values(this.resumeDetails.workExp);
+      console.log(this.workExp[0].designation1)
+      for (let i = 1; i <= this.workExp.length; i++) {
+        this.addWorkCount.push(`workExperience${i}`);
+        this.resumeForm.addControl(
+          `workExperience${i}`,
+          this.formBuilder.group({
+            designation1: new FormControl(this.workExp[i-1].designation1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+            ]),
+            cname1: new FormControl(this.workExp[i-1].cname1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+            ]),
+            fromDate1: new FormControl(this.workExp[i-1].fromDate1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+              FormValidators.dateValidation,
+            ]),
+            toDate1: new FormControl(this.workExp[i-1].toDate1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+              FormValidators.dateValidation,
+            ]),
+            tasks1: new FormControl(this.workExp[i-1].tasks1),
+          })
+        );
+      }
 
-      workExperience1: this.formBuilder.group({
-        designation1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        cname1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        fromDate1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-          FormValidators.dateValidation,
-          FormValidators.monthValidation,
-        ]),
-        toDate1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-          FormValidators.dateValidation,
-          FormValidators.monthValidation
-        ]),
-        tasks1: new FormControl(''),
-      }),
+      this.addEduCount = [];
+      this.education = Object.values(this.resumeDetails.edu);
+      console.log(this.education[0].course1)
+      for (let i = 1; i <= this.education.length; i++) {
+        this.addEduCount.push(`education${i}`);
+        this.resumeForm.addControl(
+          `education${i}`,
+          this.formBuilder.group({
+            course1: new FormControl(this.education[i-1].course1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+            ]),
+            clg_name1: new FormControl(this.education[i-1].clg_name1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+            ]),
+            fromDate1: new FormControl(this.education[i-1].fromDate1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+              FormValidators.dateValidation,
+            ]),
+            toDate1: new FormControl(this.education[i-1].toDate1, [
+              Validators.required,
+              FormValidators.notOnlyWhitespace,
+              FormValidators.dateValidation,
+            ]),
+          })
+        );
+      }
 
-      education1: this.formBuilder.group({
-        course1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        clg_name1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-        fromDate1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-          FormValidators.dateValidation,
-        ]),
-        toDate1: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-          FormValidators.dateValidation,
-        ]),
-      }),
+    }
+    else {
+      this.resumeForm = this.formBuilder.group({
+        personal: this.formBuilder.group({
+          name: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          language: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          about: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          email: new FormControl('', [
+            Validators.required,
+            // Validators.minLength(2),
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          ]),
+          contact: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[0-9]{10}'),
+          ]),
+          linkedin: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          github: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          skill: new FormControl(''),
+        }),
+  
+        workExperience1: this.formBuilder.group({
+          designation1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          cname1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          fromDate1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+            FormValidators.dateValidation,
+            FormValidators.monthValidation,
+          ]),
+          toDate1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+            FormValidators.dateValidation,
+            FormValidators.monthValidation
+          ]),
+          tasks1: new FormControl(''),
+        }),
+  
+        education1: this.formBuilder.group({
+          course1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          clg_name1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+          fromDate1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+            FormValidators.dateValidation,
+          ]),
+          toDate1: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+            FormValidators.dateValidation,
+          ]),
+        }),
+  
+        technical: this.formBuilder.group({
+          technicalskills: new FormControl('', [
+            Validators.required,
+            FormValidators.notOnlyWhitespace,
+          ]),
+        }),
+      });
+    }
+    
+    // console.log(this.addWorkCount)
 
-      technical: this.formBuilder.group({
-        technicalskills: new FormControl('', [
-          Validators.required,
-          FormValidators.notOnlyWhitespace,
-        ]),
-      }),
-    });
-  }
-
-  skills: Skill[] = [{ name: 'Team Work' }];
+    
+  }  
 
   get name() {
     return this.resumeForm.get('personal.name');
@@ -175,13 +293,16 @@ export class BasicResumeComponent implements OnInit {
   get skill() {
     return this.resumeForm.get('personal.skill');
   }
+  get about() {
+    return this.resumeForm.get('personal.about');
+  }
   
-  get fromDate1() {  
-    return this.resumeForm.get('workExperience1.fromDate1');
-  }
-  get toDate1(){ 
-    return this.resumeForm.get('workExperience1.toDate1');
-  }
+  // get fromDate1() {  
+  //   return this.resumeForm.get('workExperience1.fromDate1');
+  // }
+  // get toDate1(){ 
+  //   return this.resumeForm.get('workExperience1.toDate1');
+  // }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -304,6 +425,7 @@ export class BasicResumeComponent implements OnInit {
 
     if (this.resumeForm.invalid) {
       // markAllAsTouched - triggers display of error messages
+      console.log('here')
       this.resumeForm.markAllAsTouched();
       return;
     }
@@ -326,7 +448,7 @@ export class BasicResumeComponent implements OnInit {
       workExp[`${item}`] = this.resumeForm.get(`${item}`).value;
       resumeDetails = { ...resumeDetails, workExp };
     }
-
+    
     let edu = {};
     for (let item of this.addEduCount) {
       // console.log(this.resumeForm.get(`education${item}`).value);
@@ -335,9 +457,11 @@ export class BasicResumeComponent implements OnInit {
     }
 
     console.log(resumeDetails);
-
-    // this.resumeService.setResumeInfo(resumeDetails);
+    this.lstorage.setItem('resumeDetails',JSON.stringify(resumeDetails));
+    this.resumeService.setResumeInfo(resumeDetails);
+    this.resumeService.setworkArray(this.addWorkCount);
+    this.resumeService.seteduArray(this.addEduCount);
     // this.resumeService.setSkills(this.skills)
-    // this.router.navigateByUrl(`preview/basic-resume`);
+    this.router.navigateByUrl(`preview/basic-resume`);
   }
 }

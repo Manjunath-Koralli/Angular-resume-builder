@@ -31,6 +31,8 @@ import { ExecutiveResumeComponent } from './components/resumes/executive-resume/
 import { BasicPreviewComponent } from './components/previews/basic-preview/basic-preview.component';
 import { ExecutivePreviewComponent } from './components/previews/executive-preview/executive-preview.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TextTransformPipe } from './pipes/text-transform.pipe';
+import { TasksTransformPipe } from './pipes/tasks-transform.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ExecutiveResumeComponent,
     BasicPreviewComponent,
     ExecutivePreviewComponent,
+    TextTransformPipe,
+    TasksTransformPipe,
   ],
   imports: [
     BrowserModule,

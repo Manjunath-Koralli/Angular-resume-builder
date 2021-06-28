@@ -35,29 +35,58 @@
                       <mat-label class="form-label">Email</mat-label>
                       <input type="email" matInput placeholder="email" formControlName="email"/>
                     </mat-form-field>
+                    <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)">
+                      <div *ngIf="email.errors.required">
+                        Email is required
+                      </div>
+                      <div *ngIf="email.errors.pattern">
+                        Email must be valid pattern
+                      </div>
+                    </div>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Contact</mat-label>
                       <input type="tel" matInput placeholder="contact" formControlName="contact" />
                     </mat-form-field>
+                    <div class="error" *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+                      <div *ngIf="contact.errors.required || contact.errors.notOnlyWhitespace">
+                        Contact is required
+                      </div>
+                    </div>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">LinkedIn</mat-label>
                       <input type="text" matInput placeholder="linkedin" formControlName="linkedin"/>
                     </mat-form-field>
+                    <div class="error" *ngIf="linkedin.invalid && (linkedin.dirty || linkedin.touched)">
+                      <div *ngIf="linkedin.errors.required || linkedin.errors.notOnlyWhitespace">
+                        Linkedin is required
+                      </div>
+                    </div>
 
                     <mat-form-field class="example-full-width">
                       <mat-label class="form-label">Github</mat-label>
                       <input type="text" matInput placeholder="github" formControlName="github"/>
                     </mat-form-field>
+                    <div class="error" *ngIf="github.invalid && (github.dirty || github.touched)">
+                      <div *ngIf="github.errors.required || github.errors.notOnlyWhitespace">
+                        Github is required
+                      </div>
+                    </div>
                   </ion-col>
                 </ion-row>
+
                 <ion-row>
                   <ion-col>
                     <mat-form-field class="example-full-width">
                       <mat-label  class="form-label">About you</mat-label>
                       <textarea formControlName="about" matInput placeholder="" class="text-area"></textarea>
                     </mat-form-field>
+                    <div class="error" *ngIf="about.invalid && (about.dirty || about.touched)">
+                      <div *ngIf="about.errors.required || about.errors.notOnlyWhitespace">
+                        About is required
+                      </div>
+                    </div>
                   </ion-col>
                 </ion-row>
               </ion-grid>          
@@ -148,6 +177,9 @@
                                   </div> 
                                   <div *ngIf="resumeForm.get(count + '.toDate1').errors.dateValidation">
                                     To date pattern is not correct
+                                  </div>
+                                  <div *ngIf="resumeForm.get(count + '.toDate1').errors.monthValidation">
+                                    To date month is not correct
                                   </div>
                                 </div>
                               </ion-col>

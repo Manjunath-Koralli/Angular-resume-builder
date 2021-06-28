@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ResumeinfoService } from 'src/app/shared-services/resumeinfo.service';
-import { faArrowDown,faFont } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown,faFont, faEnvelope, faPhoneAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { AngularCreatePdfService } from 'angular-create-pdf';
+import { Router } from '@angular/router';
 
 export interface Skill {
   name: string;
@@ -16,70 +18,43 @@ export interface Skill {
 export class BasicPreviewComponent implements OnInit {
   resumeObject;
   exampleObject;
-  
+  resumeDetails;
+  workExp; 
+  education;
+  language;
+  fontStyle;
+  edit : boolean = false;
+
   faArrowDown = faArrowDown;
   faFont = faFont;
-  skills: Skill[] = [
-    { name: 'Public Speaking' },
-    { name: 'Team Work' },
-    { name: 'Agile Methodologies' },
-    { name: 'SEO' },
-    { name: 'SEO' },
-  ];
+  faEnvelope = faEnvelope; 
+  faPhoneAlt = faPhoneAlt;
+  faLinkedin = faLinkedin;
+  faGithub = faGithub;
+  faMobileAlt = faMobileAlt;
 
   fonts = ['Ubuntu','Raleway','Roboto','Overpass','Hind'];
-
-  constructor(private resumeService: ResumeinfoService,private pdfService: AngularCreatePdfService) {}
-
+  storage : Storage = localStorage;
+  // sStorage : Storage = sessionStorage;
+  tasks = [];
+  constructor(private resumeService: ResumeinfoService,private pdfService: AngularCreatePdfService,private router: Router) {}
+  
   ngOnInit(): void {
     this.resumeObject = this.resumeService.getResumeInfo();
-    //this.skills = this.resumeService.getSkills();
-    console.log(this.resumeObject);
-    this.exampleObject = {
-      name: 'Manjunath Koralli',
-      about: 'I am a software developer',
-      contact: '9880919001',
-      email: 'mskoralli@gmail.com',
-      github: 'github.com/manjunath-koralli',      
-      linkedin: 'manjunath-koralli', 
-      language: [
-        'English','Kannada','Hindi','Konkani','Tamil'
-      ],
-      education: [
-        {
-          course : 'BE',
-          clg_name : 'Sahyadri',
-          years : new Date() + "- " + new Date(),
-        },
-        {
-          course : 'BE',
-          clg_name : 'Sahyadri',
-          years : new Date() + "- " + new Date(),
-        }
-      ],       
-      experience: [
-        {
-          designation : 'developer',
-          cname : 'slk',
-          years : new Date() + "- " + new Date(),
-          description : [
-            'Worked on integration','Worked on API'
-          ]          
-        },
-        {
-          designation : 'ui developer',
-          cname: 'infy',
-          years : new Date() + "- " + new Date(),
-          description : [
-            'Worked on integration1','Worked on API1'
-          ]
-        },
-      ],
-           
-      org: 'CLOUDS'
-    }; 
-    console.log(this.exampleObject);
-    console.log(this.skills);
+    this.resumeDetails = JSON.parse(this.storage.getItem('resumeDetails'));
+    console.log(this.resumeDetails);
+    this.workExp = Object.values(this.resumeDetails.workExp);
+    console.log(this.workExp)  
+    this.education = Object.values(this.resumeDetails.edu)   
+    console.log(this.education)
+    this.language = this.resumeDetails.language.split(',')
+    console.log(this.language)
+    for(let i = 0;i < this.workExp.length; i++) {
+      this.tasks.push(this.workExp[i].tasks1)      
+    }
+    // console.log(this.tasks) 
+    this.fontStyle = JSON.parse(this.storage.getItem('fontStyle'));
+    this.setStyle(this.fontStyle)
   }
 
   public createPdfTem(ele: any) {
@@ -90,20 +65,21 @@ export class BasicPreviewComponent implements OnInit {
     let style = event.target.textContent;
     console.log(style);    
     this.setStyle(style);
-    // if(style === 'Ubuntu'){
-    //   ptag.classList.add('ptag1Ubuntu');
-    // }
-    // else if(style === '')
-    // let containerCard = document.querySelector('.resume-preview-card');  
-    // containerCard.classList.add('resume-font');
+    this.storage.setItem('fontStyle',JSON.stringify(style));
   }
 
   setStyle(style) {
-    let ptag = document.querySelector('.ptag');
+    let ptag = document.querySelector('.resume-preview-card');
     for(let font of this.fonts){
       ptag.classList.remove(`ptag1${font}`);
     }
     ptag.classList.add(`ptag1${style}`);
+  }
+
+  editForm() {
+    this.edit = true;
+    this.resumeService.setEdit(this.edit)
+    this.router.navigateByUrl(`resume/basic-resume`);
   }
 
   
