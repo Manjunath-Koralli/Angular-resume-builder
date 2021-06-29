@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'resume-templates', component: ResumeComponent },
   { path: 'cv-templates', component: CvTemplatesComponent },
   { path: 'cover-letters', component: CoverLettersComponent },
-  { path: 'resume/basic-resume', component: BasicResumeComponent },
+  { path: 'resume/resume-form', component: BasicResumeComponent },
   { path: 'resume/executive-resume', component: ExecutiveResumeComponent },
   { path: 'preview/basic-resume', component: BasicPreviewComponent },
   { path: 'preview/executive-resume', component: ExecutivePreviewComponent },

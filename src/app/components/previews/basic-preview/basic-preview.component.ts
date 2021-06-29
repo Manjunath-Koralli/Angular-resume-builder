@@ -35,11 +35,15 @@ export class BasicPreviewComponent implements OnInit {
 
   fonts = ['Ubuntu','Raleway','Roboto','Overpass','Hind'];
   storage : Storage = localStorage;
+  resumeType;
   // sStorage : Storage = sessionStorage;
   tasks = [];
-  constructor(private resumeService: ResumeinfoService,private pdfService: AngularCreatePdfService,private router: Router) {}
+  constructor(private resumeService: ResumeinfoService,private pdfService: AngularCreatePdfService,private router: Router) {
+    
+  }
   
   ngOnInit(): void {
+    this.resumeType = JSON.parse(this.storage.getItem('type'));
     this.resumeObject = this.resumeService.getResumeInfo();
     this.resumeDetails = JSON.parse(this.storage.getItem('resumeDetails'));
     console.log(this.resumeDetails);
@@ -53,8 +57,8 @@ export class BasicPreviewComponent implements OnInit {
       this.tasks.push(this.workExp[i].tasks1)      
     }
     // console.log(this.tasks) 
-    this.fontStyle = JSON.parse(this.storage.getItem('fontStyle'));
-    this.setStyle(this.fontStyle)
+    //this.fontStyle = JSON.parse(this.storage.getItem('fontStyle'));
+    // this.setStyle(this.fontStyle)
   }
 
   public createPdfTem(ele: any) {
@@ -79,7 +83,7 @@ export class BasicPreviewComponent implements OnInit {
   editForm() {
     this.edit = true;
     this.resumeService.setEdit(this.edit)
-    this.router.navigateByUrl(`resume/basic-resume`);
+    this.router.navigateByUrl(`resume/resume-form`);
   }
 
   
