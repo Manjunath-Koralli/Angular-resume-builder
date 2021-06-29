@@ -364,77 +364,46 @@
         </mat-card-content>
 
         <mat-card-content *ngIf="resumeType == 'simple'">
+          <mat-card-title>{{ resumeDetails.name }}</mat-card-title>
+          <p class="ptag">{{ resumeDetails.about }}</p>
+          <!-- <hr style="color: black;"> -->
+          <br>
           <ion-grid>
-            <ion-row>
-              <ion-col size="8">
-                <mat-card-title>{{ resumeDetails.name }}</mat-card-title>
-                <p class="ptag">{{ resumeDetails.about }}</p>
-              </ion-col>
-              <ion-col size="1"></ion-col>
+            <ion-row class="social-simple" style="background-color: gray;">
               <ion-col size="3">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="8">
-                      {{ resumeDetails.email }}
-                    </ion-col>
-                    <ion-col></ion-col>
-                    <ion-col>
-                      <fa-icon [icon]="faEnvelope" class="fa-2x" style="padding: 5px;"></fa-icon>                       
-                    </ion-col>
-                  </ion-row>
-                  <br>
-                  <ion-row>
-                    <ion-col size="8">
-                      {{ resumeDetails.contact }}
-                    </ion-col>
-                    <ion-col></ion-col>
-                    <ion-col>
-                      <fa-icon [icon]="faMobileAlt" class="fa-2x" style="padding: 5px;"></fa-icon>                       
-                    </ion-col>
-                  </ion-row>
-                  <br>
-                  <ion-row>
-                    <ion-col size="10">
-                      {{ resumeDetails.linkedin | textTransform }}
-                    </ion-col>
-                    <!-- <ion-col></ion-col> -->
-                    <ion-col>
-                      <fa-icon [icon]="faLinkedin" class="fa-2x" style="padding: 5px;"></fa-icon>                       
-                    </ion-col>
-                  </ion-row>
-                  <br>
-                  <ion-row>
-                    <ion-col size="8">
-                      {{ resumeDetails.github | textTransform }}
-                    </ion-col>
-                    <ion-col></ion-col>
-                    <ion-col>
-                      <fa-icon [icon]="faGithub" class="fa-2x" style="padding: 5px;"></fa-icon>                       
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>            
+                <fa-icon [icon]="faEnvelope" class="fa-2x" style="padding: 5px;"></fa-icon> 
+                {{ resumeDetails.email }}
+              </ion-col>
+              <ion-col size="2">
+                <fa-icon [icon]="faMobileAlt" class="fa-2x" style="padding: 5px;"></fa-icon> 
+                {{ resumeDetails.contact }}
+              </ion-col>
+              <ion-col size="4">
+                <fa-icon [icon]="faLinkedin" class="fa-2x" style="padding: 5px;"></fa-icon> 
+                {{ resumeDetails.linkedin | textTransform }}
+              </ion-col>
+              <ion-col size="3">
+                <fa-icon [icon]="faGithub" class="fa-2x" style="padding: 5px;"></fa-icon> 
+                {{ resumeDetails.github | textTransform }}
               </ion-col>
             </ion-row>
           </ion-grid>
-          
-          <hr style="color: black;">
-          <h2 class="heading-align">SKILLS</h2>
-          <hr style="color: black;">          
-          <mat-chip-list #chipList aria-label="Skill selection">
-            <mat-chip *ngFor="let skill of resumeDetails.skills" [selectable]="selectable" [removable]="removable"
-              (removed)="remove(skill)">
-              {{ skill.name }}
-            </mat-chip>
-          </mat-chip-list>
-
           <br>
-          <hr style="color: black;">
-          <h2 class="heading-align">WORK EXPERIENCE</h2>
-          <hr style="color: black;">
+          <!-- <hr style="color: black;"> -->
+          <h2>SKILLS</h2>
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngFor="let skill of resumeDetails.skills">
+                {{ skill.name }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <br>
+          <h2>WORK EXPERIENCE</h2>
           <div *ngFor="let exp of workExp">
             <ion-grid>
               <ion-row>
-                <ion-col class="des">{{ exp.designation1 }}</ion-col>
+                <ion-col class="des">--- {{ exp.designation1 }}</ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>{{ exp.cname1 }}</ion-col>
@@ -449,14 +418,11 @@
               </ion-row>
             </ion-grid>
           </div>
-
-          <hr style="color: black;">
-          <h2 class="heading-align">EDUCATION</h2>
-          <hr style="color: black;">
+          <h2>EDUCATION</h2>
           <div *ngFor="let edu of education">
             <ion-grid>
               <ion-row>
-                <ion-col class="des">{{ edu.course1 }}</ion-col>
+                <ion-col class="des">--- {{ edu.course1 }}</ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>{{ edu.clg_name1 }}</ion-col>
@@ -466,10 +432,7 @@
               </ion-row>
             </ion-grid>
           </div>
-
-          <hr style="color: black;">
-          <h2 class="heading-align">LANGUAGES</h2>
-          <hr style="color: black;">
+          <h2>LANGUAGES</h2>
           <ion-grid>
             <ion-row >
               <ion-col *ngFor="let lan of language">
@@ -478,6 +441,7 @@
             </ion-row>
           </ion-grid>          
         </mat-card-content>
+        
       </mat-card>
     </ion-col>
     <ion-col size="2"></ion-col>
