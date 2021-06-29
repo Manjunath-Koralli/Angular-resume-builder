@@ -68,7 +68,7 @@ export class BasicResumeComponent implements OnInit {
     }
     this.resumeDetails = JSON.parse(this.lstorage.getItem('resumeDetails'));
     this.edit = this.resumeService.getEdit();
-    if(this.edit) {
+    if(this.edit || this.resumeDetails) {
       this.skills = [];
       // console.log(this.resumeDetails.skills)
       for(let skill of this.resumeDetails.skills) {

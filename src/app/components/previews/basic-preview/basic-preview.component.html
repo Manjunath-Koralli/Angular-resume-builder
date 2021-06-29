@@ -40,12 +40,12 @@
   </div>
 </ng-template>
 
-<ion-grid *ngIf="resumeType == 'basic'">
+<ion-grid >
   <ion-row>
     <ion-col size="2"></ion-col>
     <ion-col size="8">
       <mat-card class="resume-preview-card">
-        <mat-card-content>
+        <mat-card-content *ngIf="resumeType == 'basic'">
           <mat-card-title>{{ resumeDetails.name }}</mat-card-title>
           <p class="ptag">{{ resumeDetails.about }}</p>
           <hr style="color: black;">
@@ -120,18 +120,8 @@
             </ion-row>
           </ion-grid>          
         </mat-card-content>
-      </mat-card>
-    </ion-col>
-    <ion-col size="2"></ion-col>
-  </ion-row>
-</ion-grid>
 
-<ion-grid *ngIf="resumeType == 'college'">
-  <ion-row>
-    <ion-col size="2"></ion-col>
-    <ion-col size="8">
-      <mat-card class="resume-preview-card">
-        <mat-card-content>
+        <mat-card-content *ngIf="resumeType == 'college'">
           <ion-grid>
             <ion-row>
               <ion-col size="8">
@@ -246,18 +236,8 @@
             </ion-row>
           </ion-grid>          
         </mat-card-content>
-      </mat-card>
-    </ion-col>
-    <ion-col size="2"></ion-col>
-  </ion-row>
-</ion-grid>
 
-<ion-grid *ngIf="resumeType == 'functional'">
-  <ion-row>
-    <ion-col size="2"></ion-col>
-    <ion-col size="8">
-      <mat-card class="resume-preview-card">
-        <mat-card-content>
+        <mat-card-content *ngIf="resumeType == 'functional'">
           <mat-card-title>{{ resumeDetails.name }}</mat-card-title>
           <p class="ptag">{{ resumeDetails.about }}</p>
           <br>
@@ -382,18 +362,8 @@
             </ion-row>
           </ion-grid>         
         </mat-card-content>
-      </mat-card>
-    </ion-col>
-    <ion-col size="2"></ion-col>
-  </ion-row>
-</ion-grid>
 
-<ion-grid *ngIf="resumeType == 'simple'">
-  <ion-row>
-    <ion-col size="2"></ion-col>
-    <ion-col size="8">
-      <mat-card class="resume-preview-card">
-        <mat-card-content>
+        <mat-card-content *ngIf="resumeType == 'simple'">
           <ion-grid>
             <ion-row>
               <ion-col size="8">
@@ -513,6 +483,8 @@
     <ion-col size="2"></ion-col>
   </ion-row>
 </ion-grid>
+
+
 
 </div>
 
