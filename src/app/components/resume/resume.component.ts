@@ -17,7 +17,6 @@ export class ResumeComponent implements OnInit {
 
   ngOnInit(): void {
     this.resumeDetails = JSON.parse(this.lstorage.getItem('resumeDetails'));
-    console.log(Object.entries(this.resumeDetails));
   }
 
   gotoResumeForm(type : string){

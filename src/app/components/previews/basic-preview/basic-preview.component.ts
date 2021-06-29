@@ -57,8 +57,8 @@ export class BasicPreviewComponent implements OnInit {
       this.tasks.push(this.workExp[i].tasks1)      
     }
     // console.log(this.tasks) 
-    //this.fontStyle = JSON.parse(this.storage.getItem('fontStyle'));
-    // this.setStyle(this.fontStyle)
+    this.fontStyle = JSON.parse(this.storage.getItem('fontStyle'));
+    this.setStyle(this.fontStyle)
   }
 
   public createPdfTem(ele: any) {
