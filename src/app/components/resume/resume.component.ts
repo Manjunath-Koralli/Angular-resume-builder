@@ -24,6 +24,6 @@ export class ResumeComponent implements OnInit {
     this.edit = false;
     // this.storage.setItem('edit',JSON.stringify(this.edit));
     this.lstorage.setItem('type',JSON.stringify(type));    
-    this.router.navigateByUrl(`resume/resume-form`);
+    this.router.navigateByUrl(`resume/editor`);
   }
 }

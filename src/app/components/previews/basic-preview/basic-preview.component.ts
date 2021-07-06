@@ -83,7 +83,7 @@ export class BasicPreviewComponent implements OnInit {
   editForm() {
     this.edit = true;
     this.resumeService.setEdit(this.edit)
-    this.router.navigateByUrl(`resume/resume-form`);
+    this.router.navigateByUrl(`resume/editor`);
   }
 
   

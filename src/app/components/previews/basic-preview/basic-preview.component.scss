@@ -6,7 +6,7 @@
   margin-top: 10px;
   border-radius: 50px;
   background-color: #595959;
-  //height: 80px;
+  height: 80px;
 }
 
 .download-card {
@@ -43,6 +43,15 @@
 }
 
 .resume-preview-card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #e6e6e6;
+  //height: 80px;
+  color: black;
+  font-size: small;
+}
+
+.template-card {
   margin-top: 50px;
   margin-bottom: 50px;
   background-color: #e6e6e6;

@@ -1,7 +1,32 @@
+<div class="template-background">
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size="6">
+        <mat-card class="settings-card">
+          <fa-icon [icon]="faFont" class="fa-2x"></fa-icon>
+          Choose Fonts 
+          <ion-grid>
+            <ion-row>
+              <ion-col>               
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </mat-card>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
 <ion-grid class="template-background">
   <ion-row>
-    <ion-col size="2"> </ion-col>
-    <ion-col size="8">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <div class="editor">
+        <p>My Resume</p>
+      </div>      
       <mat-card class="resume-card">
         <mat-card-content>
           <form [formGroup]="resumeForm" class="example-form" (ngSubmit)="onSave()">
@@ -51,6 +76,9 @@
                     <div class="error" *ngIf="contact.invalid && (contact.dirty || contact.touched)">
                       <div *ngIf="contact.errors.required || contact.errors.notOnlyWhitespace">
                         Contact is required
+                      </div>
+                      <div *ngIf="contact.errors.pattern">
+                        Contact must be 10 numbers
                       </div>
                     </div>
 
@@ -308,6 +336,6 @@
         </mat-card-content>
       </mat-card>
     </ion-col>
-    <ion-col size="2"> </ion-col>
+    <ion-col size="1"> </ion-col>
   </ion-row>
 </ion-grid>

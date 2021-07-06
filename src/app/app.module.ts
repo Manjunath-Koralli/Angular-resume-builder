@@ -27,9 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CoverLettersComponent } from './components/cover-letters/cover-letters.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BasicResumeComponent } from './components/resumes/basic-resume/basic-resume.component';
-import { ExecutiveResumeComponent } from './components/resumes/executive-resume/executive-resume.component';
 import { BasicPreviewComponent } from './components/previews/basic-preview/basic-preview.component';
-import { ExecutivePreviewComponent } from './components/previews/executive-preview/executive-preview.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TextTransformPipe } from './pipes/text-transform.pipe';
 import { TasksTransformPipe } from './pipes/tasks-transform.pipe';
@@ -43,9 +41,7 @@ import { TasksTransformPipe } from './pipes/tasks-transform.pipe';
     CoverLettersComponent,
     FooterComponent,
     BasicResumeComponent,
-    ExecutiveResumeComponent,
     BasicPreviewComponent,
-    ExecutivePreviewComponent,
     TextTransformPipe,
     TasksTransformPipe,
   ],

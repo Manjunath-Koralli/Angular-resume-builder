@@ -10,12 +10,13 @@ import {
 import { ResumeinfoService } from 'src/app/shared-services/resumeinfo.service';
 import { Router } from '@angular/router';
 import {
-  faPlusCircle,
+  faPlusCircle, faFont,
   faTrashAlt,
   faSlash,
 } from '@fortawesome/free-solid-svg-icons';
 import { ViewEncapsulation } from '@angular/core';
 import { FormValidators } from 'src/app/validators/form-validators';
+
 
 export interface Skill {
   name: string;
@@ -33,6 +34,7 @@ export class BasicResumeComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faTrashAlt = faTrashAlt;
   faSlash = faSlash;
+  faFont = faFont;
   resumeForm: FormGroup;
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -462,6 +464,6 @@ export class BasicResumeComponent implements OnInit {
     this.resumeService.setworkArray(this.addWorkCount);
     this.resumeService.seteduArray(this.addEduCount);
     // this.resumeService.setSkills(this.skills)
-    this.router.navigateByUrl(`preview/basic-resume`);
+    this.router.navigateByUrl(`resume/resume-preview`);
   }
 }
